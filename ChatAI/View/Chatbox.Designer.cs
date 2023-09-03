@@ -29,9 +29,11 @@ namespace winforms_chat.ChatForm
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chatbox));
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             itemsPanel = new System.Windows.Forms.Panel();
             topPanel = new System.Windows.Forms.Panel();
+            buttonSettings = new System.Windows.Forms.Button();
             statusLabel = new System.Windows.Forms.Label();
             subHeaderLabel = new System.Windows.Forms.Label();
             mainHeaderLabel = new System.Windows.Forms.Label();
@@ -80,6 +82,7 @@ namespace winforms_chat.ChatForm
             // topPanel
             // 
             topPanel.BackColor = System.Drawing.Color.FromArgb(246, 246, 246);
+            topPanel.Controls.Add(buttonSettings);
             topPanel.Controls.Add(statusLabel);
             topPanel.Controls.Add(subHeaderLabel);
             topPanel.Controls.Add(mainHeaderLabel);
@@ -93,13 +96,26 @@ namespace winforms_chat.ChatForm
             topPanel.Size = new System.Drawing.Size(872, 60);
             topPanel.TabIndex = 3;
             // 
+            // buttonSettings
+            // 
+            buttonSettings.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            buttonSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(246, 246, 246);
+            buttonSettings.FlatAppearance.BorderSize = 0;
+            buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonSettings.Image = (System.Drawing.Image)resources.GetObject("buttonSettings.Image");
+            buttonSettings.Location = new System.Drawing.Point(832, 3);
+            buttonSettings.Name = "buttonSettings";
+            buttonSettings.Size = new System.Drawing.Size(32, 33);
+            buttonSettings.TabIndex = 3;
+            buttonSettings.UseVisualStyleBackColor = true;
+            // 
             // statusLabel
             // 
+            statusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             statusLabel.AutoSize = true;
-            statusLabel.Dock = System.Windows.Forms.DockStyle.Right;
             statusLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             statusLabel.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            statusLabel.Location = new System.Drawing.Point(814, 17);
+            statusLabel.Location = new System.Drawing.Point(824, 39);
             statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new System.Drawing.Size(40, 15);
@@ -156,7 +172,7 @@ namespace winforms_chat.ChatForm
             chatTextbox.Name = "chatTextbox";
             chatTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             chatTextbox.Size = new System.Drawing.Size(750, 37);
-            chatTextbox.TabIndex = 7;
+            chatTextbox.TabIndex = 0;
             chatTextbox.TextChanged += chatTextbox_TextChanged;
             // 
             // sendButton
@@ -202,7 +218,8 @@ namespace winforms_chat.ChatForm
         private System.Windows.Forms.Label subHeaderLabel;
         private System.Windows.Forms.Label mainHeaderLabel;
         private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.TextBox chatTextbox;
-        private System.Windows.Forms.Button sendButton;
+        public System.Windows.Forms.TextBox chatTextbox;
+        public System.Windows.Forms.Button sendButton;
+        public System.Windows.Forms.Button buttonSettings;
     }
 }

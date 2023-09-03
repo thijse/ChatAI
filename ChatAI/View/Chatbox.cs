@@ -1,45 +1,44 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using winforms_chat.AIProvider.OpenAI;
 using winforms_chat.Model;
+using winforms_chat.Utilities;
+using winforms_chat.View;
 using winforms_chat.ViewModels;
-using static OpenAI.ObjectModels.StaticValues.ImageStatics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace winforms_chat.ChatForm
 {
     public partial class Chatbox : UserControl
     {
+        public event EventHandler CtrlEnterPressed;
         private int _baseHeightChat;
-        private ChatAIViewModel _chatAiVm;
 
-        public MessageChainViewModel _messageChainVm { get; }
+        public override string Text 
+        { 
+            get => chatTextbox.Text; 
+            set => chatTextbox.Text = value; 
+        }
 
         public ChatboxInfo chatboxInfo;
         public OpenFileDialog fileDialog = new OpenFileDialog();
-        public string initialdirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private int _autoScaledHeight;
+        public string initialdirectory  = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        public Chatbox(ChatboxInfo _chatbox_info, ChatAIViewModel chatAiVm)
+        public Chatbox(ChatboxInfo _chatbox_info)
         {
             InitializeComponent();
-            _baseHeightChat = chatTextbox.Height;
-            _chatAiVm = chatAiVm;
-            _messageChainVm = chatAiVm.MessageChainVM;
-            chatboxInfo = _chatbox_info;
-
+            _baseHeightChat      = chatTextbox.Height;
+            chatboxInfo          = _chatbox_info;
             mainHeaderLabel.Text = chatboxInfo.NamePlaceholder;
-            statusLabel.Text = chatboxInfo.StatusPlaceholder;
-            subHeaderLabel.Text = chatboxInfo.PhonePlaceholder;
-            chatTextbox.Text = chatboxInfo.ChatPlaceholder;
+            statusLabel.Text     = chatboxInfo.StatusPlaceholder;
+            subHeaderLabel.Text  = chatboxInfo.PhonePlaceholder;
+            chatTextbox.Text     = chatboxInfo.ChatPlaceholder;
 
-            chatTextbox.Enter += ChatEnter;
-            chatTextbox.Leave += ChatLeave;
-            sendButton.Click += SendMessage;
+            chatTextbox.Enter   += ChatEnter;
+            chatTextbox.KeyDown += OnKeyDown;
 
-            chatTextbox.KeyDown += OnEnter;
 
-            AddMessage(_messageChainVm.AddInitialPromptMessage());
         }
 
         /// <summary>
@@ -55,9 +54,12 @@ namespace winforms_chat.ChatForm
             itemsPanel.Controls.Add(chatItem);
             chatItem.BringToFront();
 
-            chatItem.ResizeBubbles((int)(itemsPanel.Width * 0.6));
-
+            chatItem.ResizeBubbles((int)(itemsPanel.Width * 1));
             itemsPanel.ScrollControlIntoView(chatItem);
+            Task.Delay(100).ContinueWith(_ =>
+            {
+                this.Invoke(new Action(() => { chatTextbox.Select(); }));
+            });
         }
 
         //Improves the chat UI slightly by having a placeholder text. Note that this is implemented because Winforms doesn't have a native "placeholder" UI. Can be buggy.
@@ -80,29 +82,13 @@ namespace winforms_chat.ChatForm
             }
         }
 
-        //Cross-tested this with the Twilio API and the RingCentral API, and async messaging is the way to go.
-        async void SendMessage(object sender, EventArgs e)
-        {
-            string chatmessage = chatTextbox.Text.Trim();
-
-            // Add sent message to chatbox 
-            var message = _messageChainVm.AddNewUserMessage(chatboxInfo, chatmessage);
-            AddMessage(message);
-
-
-            // Add sent message to chatbox 
-            var messageReceived = await _messageChainVm.GenerateAiResponse(chatboxInfo, chatmessage);
-            AddMessage(messageReceived);
-
-            chatTextbox.Text = "";
-        }
-
-        //Inspired from Slack, you can also press Shift + Enter to enter text.
-        async void OnEnter(object sender, KeyEventArgs e)
+        //press Shift + Enter to enter text.
+        async void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Shift && e.KeyValue == 13)
             {
-                SendMessage(this, null);
+                if (CtrlEnterPressed != null) CtrlEnterPressed(this, null);
+
             }
         }
 
@@ -114,7 +100,7 @@ namespace winforms_chat.ChatForm
             {
                 if (control is ChatItem)
                 {
-                    (control as ChatItem).ResizeBubbles((int)(itemsPanel.Width * 0.6));
+                    (control as ChatItem).ResizeBubbles((int)(itemsPanel.Width * 1.0));
                 }
             }
         }
@@ -125,23 +111,29 @@ namespace winforms_chat.ChatForm
             using (Graphics G = chatTextbox.CreateGraphics()) size = G.MeasureString("Xy_", chatTextbox.Font, 999);
             var currentHeight = chatTextbox.Height;
             var newHeight = (int)(chatTextbox.Lines.Length * size.Height + 5);
+            var maxAutoGrowHeight = 100;
 
-            // Let the box grow, but not indefinately
-            if (currentHeight < 100 && newHeight > currentHeight)
+            // Splitter minimum size depends directly on the height of the chatbox
+            splitContainer1.Panel2MinSize = newHeight + 10;
+
+            // Let the box grow, but not indefinitely
+            if (currentHeight < maxAutoGrowHeight && newHeight > currentHeight)
             {
                 //splitContainer1.Panel2.Height = newHeight + 10;
                 splitContainer1.SplitterDistance -= newHeight - currentHeight;
-                _autoScaledHeight = newHeight;
+
+                //_autoScaledHeight = newHeight;
             }
-            else if (newHeight > _baseHeightChat && newHeight < currentHeight && currentHeight <= _autoScaledHeight)
+            // Shrink the box if the text is deleted
+            else if (newHeight < currentHeight)// &&  currentHeight <= _autoScaledHeight)
             {
+                newHeight = Math.Max(newHeight, _baseHeightChat);
                 splitContainer1.SplitterDistance -= newHeight - currentHeight;
             }
         }
 
         private void mainHeaderLabel_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

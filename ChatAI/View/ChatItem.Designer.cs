@@ -43,7 +43,7 @@ namespace winforms_chat.ChatForm
             authorPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             authorPanel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             authorPanel.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            authorPanel.Location = new System.Drawing.Point(12, 52);
+            authorPanel.Location = new System.Drawing.Point(12, 33);
             authorPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             authorPanel.Name = "authorPanel";
             authorPanel.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
@@ -72,7 +72,7 @@ namespace winforms_chat.ChatForm
             bodyPanel.Margin = new System.Windows.Forms.Padding(2);
             bodyPanel.Name = "bodyPanel";
             bodyPanel.Padding = new System.Windows.Forms.Padding(1);
-            bodyPanel.Size = new System.Drawing.Size(424, 46);
+            bodyPanel.Size = new System.Drawing.Size(683, 27);
             bodyPanel.TabIndex = 9;
             // 
             // bodyTextBox
@@ -80,6 +80,7 @@ namespace winforms_chat.ChatForm
             bodyTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             bodyTextBox.BackColor = System.Drawing.Color.FromArgb(216, 251, 210);
             bodyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            bodyTextBox.CausesValidation = false;
             bodyTextBox.Font = new System.Drawing.Font("Segoe UI Emoji", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             bodyTextBox.ForeColor = System.Drawing.Color.FromArgb(40, 40, 40);
             bodyTextBox.Location = new System.Drawing.Point(1, 1);
@@ -87,7 +88,7 @@ namespace winforms_chat.ChatForm
             bodyTextBox.Multiline = true;
             bodyTextBox.Name = "bodyTextBox";
             bodyTextBox.ReadOnly = true;
-            bodyTextBox.Size = new System.Drawing.Size(422, 44);
+            bodyTextBox.Size = new System.Drawing.Size(681, 25);
             bodyTextBox.TabIndex = 4;
             bodyTextBox.Text = "Hello there. This is a test for the longer word usage.";
             bodyTextBox.TextChanged += bodyTextBox_TextChanged;
@@ -102,7 +103,7 @@ namespace winforms_chat.ChatForm
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "ChatItem";
             Padding = new System.Windows.Forms.Padding(12, 6, 12, 6);
-            Size = new System.Drawing.Size(707, 88);
+            Size = new System.Drawing.Size(707, 69);
             Load += ChatItem_Load;
             authorPanel.ResumeLayout(false);
             authorPanel.PerformLayout();

@@ -7,31 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using winforms_chat.ChatForm;
 using winforms_chat.ViewModels;
 
 namespace winforms_chat
 {
     public partial class ChatMainForm : Form
     {
-        private ChatAIViewModel _chatAIVM;
+        public ChatboxInfo chatboxInfo;
+        public Chatbox chatBox;
 
-        public ChatMainForm(ChatAIViewModel chatAIVM)
+        //private ChatAIViewModel _chatAIVM;
+
+        //public ChatMainForm(ChatAIViewModel chatAIVM)
+        public ChatMainForm()
         {
             InitializeComponent();
-            _chatAIVM = chatAIVM;
+            //_chatAIVM = chatAIVM;
+            chatboxInfo = new ChatForm.ChatboxInfo();
+            chatboxInfo.NamePlaceholder = "Chat";
+            chatboxInfo.PhonePlaceholder = "";
+
+            chatBox = new ChatForm.Chatbox(chatboxInfo);
+            chatBox.Name = "chat_panel";
+            chatBox.Dock = DockStyle.Fill;
+            this.Controls.Add(chatBox);
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            ChatForm.ChatboxInfo cbi = new ChatForm.ChatboxInfo();
-            cbi.NamePlaceholder = "Chat";
-            cbi.PhonePlaceholder = "";
-
-            // todo connect cbi via _chatAIVM
-            var chat_panel = new ChatForm.Chatbox(cbi, _chatAIVM);
-            chat_panel.Name = "chat_panel";
-            chat_panel.Dock = DockStyle.Fill;
-            this.Controls.Add(chat_panel);
-        }
+        {        }
     }
 }

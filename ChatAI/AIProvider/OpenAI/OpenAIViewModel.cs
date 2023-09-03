@@ -8,28 +8,53 @@ using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels;
 using OpenAI.ObjectModels.ResponseModels;
 using OpenAI.ObjectModels.SharedModels;
+using winforms_chat.Utilities;
 using winforms_chat.Model;
+using winforms_chat.ChatGPT;
+using System.Threading;
 
-namespace winforms_chat.ChatGPT
+namespace winforms_chat.AIProvider.OpenAI
 {
-    public class OpenAIGPTViewModel : IAIViewModel
+    public class OpenAIViewModel : IAIViewModel
     {
         private OpenAIService _openAiService;
+        //AppConfig config = new AppConfig();
 
-        public OpenAIGPTViewModel()
+
+        public OpenAIViewModel()
+        {
+            LoadOpenAIService();
+        }
+
+        public void LoadOpenAIService()
         {
             _openAiService = new OpenAIService(new OpenAiOptions()
             {
-                ApiKey = "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"
+                ApiKey                  = Config<AppConfig>.Params.OpenAIKey,
+                OpenAiDefaultBaseDomain = Config<AppConfig>.Params.BaseUrl, // "http://localhost:8080/"                
             });
         }
+
+        //        private ChatCompletionCreateRequest GetDefaultChatCompletionCreateRequest()
+        //        {
+        //#pragma warning disable CS0618 // Type or member is obsolete
+        //            var request = new ChatCompletionCreateRequest()
+        //            {
+        //                Model = Models.ChatGpt3_5Turbo0301,
+        //                //MaxTokens = 3000//optional
+        //            };
+        //#pragma warning restore CS0618 // Type or member is obsolete
+
+        //            return request;
+        //        }
 
         private ChatCompletionCreateRequest GetDefaultChatCompletionCreateRequest()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             var request = new ChatCompletionCreateRequest()
             {
-                Model = Models.ChatGpt3_5Turbo0301,
+                Model = Config<AppConfig>.Params.Model  // "ggml-gpt4all-j",
+                //Model = "ggml-gpt4all-j",
                 //MaxTokens = 3000//optional
             };
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -37,22 +62,14 @@ namespace winforms_chat.ChatGPT
             return request;
         }
 
-        //public async Task<string> GetResponse(List<ChatMessage> messages)
-        //{
-        //    var request = GetDefaultChatCompletionCreateRequest();
-        //    request.Messages = messages;
-        //    var completionResult = await _openAiService.ChatCompletion.CreateCompletion(request);
-
-        //    if (completionResult.Successful)
-        //    {
-        //        var response = completionResult.Choices.First().Message.Content;
-        //        return response;
-        //    }
-        //    else
-        //    {
-        //        return "Error";
-        //    }
-        //}
+        public async Task<List<string>> GetModels()
+        {
+            List<string> models = new List<string>();   
+            var response = await _openAiService.ListModel(new CancellationTokenSource(2500).Token);
+            if (response == null) {return models; }
+            foreach (var model in response.Models){ models.Add(model.Id); }   
+            return models;
+        }
 
         public async Task<MessageModel> GetAiResponse(MessageChainModel messageChain)
         {
@@ -65,8 +82,8 @@ namespace winforms_chat.ChatGPT
                 completeRequest = await _openAiService.ChatCompletion.CreateCompletion(request);
             }
             catch { }
-                
-            
+
+
             return CreateInternalMessageFromResponse(completeRequest);
         }
 
@@ -86,7 +103,7 @@ namespace winforms_chat.ChatGPT
 
         private bool HasGPTRole(MessageModel message)
         {
-            return (message.Role == Roles.System || message.Role == Roles.Assistant || message.Role == Roles.User);
+            return message.Role == Roles.System || message.Role == Roles.Assistant || message.Role == Roles.User;
         }
 
         // Generate a message List as input for ChatGPT based on internal MessageChain model
@@ -152,7 +169,7 @@ namespace winforms_chat.ChatGPT
             else
             {
                 // We will trim the message content, as it may contain whitespaces or newlines
-                foreach (var choice in completionResult.Choices) {choice.Message.Content = choice.Message.Content.Trim();}
+                foreach (var choice in completionResult.Choices) { choice.Message.Content = choice.Message.Content.Trim(); }
 
                 message.UsedInAIChat = true;
                 // if this is the first message, select it, otherwise one has already been selected
@@ -162,10 +179,10 @@ namespace winforms_chat.ChatGPT
                     // todo, fill Custom prompt or automatically switch based on selected message
                 }
             }
-            
 
-            message.Role      = GetInternalRole(message.SelectedChatGPTMessage);
-            message.Persona   = message.SelectedChatGPTMessage?.Message?.Name;
+
+            message.Role = GetInternalRole(message.SelectedChatGPTMessage);
+            message.Persona = message.SelectedChatGPTMessage?.Message?.Name;
             message.TimeStamp = DateTime.Now;
             message.Collapsed = false;
             return message;

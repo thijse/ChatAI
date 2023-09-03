@@ -1,18 +1,72 @@
-﻿using winforms_chat.ChatGPT;
+﻿using System;
+using winforms_chat.AIProvider.OpenAI;
+using winforms_chat.ChatForm;
 using winforms_chat.Model;
+using winforms_chat.Utilities;
+using winforms_chat.View;
 
 namespace winforms_chat.ViewModels
 {
     public class ChatAIViewModel
     {
-        public MessageChainViewModel MessageChainVM { get; private set; }
-        public OpenAIGPTViewModel    OpenAIGPTVM { get; private set; }
+        
 
-        public ChatAIViewModel()
+        private Chatbox _chatbox;
+        private ChatboxInfo _chatboxInfo;
+
+        public MessageChainViewModel _messageChainVm { get; private set; }
+        public OpenAIViewModel    OpenAIGPTVM { get; private set; }
+
+        public ChatAIViewModel(ChatMainForm chatMainForm)
         {
+            _chatboxInfo   = chatMainForm.chatboxInfo;
+            _chatbox       = chatMainForm.chatBox;
+            OpenAIGPTVM    = new OpenAIViewModel();
+            _messageChainVm = new MessageChainViewModel(OpenAIGPTVM);
+
+            _chatbox.sendButton.Click += SendMessage;
+            _chatbox.CtrlEnterPressed += SendMessage;
+            _chatbox.buttonSettings.Click += OpenSettings;
+            chatMainForm.Load += ChatMainFormLoad;
             
-            OpenAIGPTVM    = new OpenAIGPTViewModel();
-            MessageChainVM = new MessageChainViewModel(OpenAIGPTVM);
+
         }
+
+        private void ChatMainFormLoad(object sender, EventArgs e)
+        {
+            _chatbox.AddMessage(_messageChainVm.AddInitialPromptMessage());
+        }
+
+        private void OpenSettings(object sender, EventArgs e)
+        {
+            // todo, move to ChatAIViewModel
+            var settingForm             = new SettingsForm();
+            var AIPanel                 = settingForm.CreateAIPanel();
+            var openAISettingsViewModel = new OpenAISettingsViewModel(AIPanel, OpenAIGPTVM);
+            var settingsViewModel       = new SettingsViewModel(settingForm, openAISettingsViewModel);
+            settingsViewModel.GetData();
+            settingForm.ShowDialog();
+            settingsViewModel.SetData();
+            // todo settings do not go into effect until next reboot. From ChatAIViewModel
+            Config<AppConfig>.Save();
+        }
+
+        async void SendMessage(object sender, EventArgs e)
+        {
+            string chatmessage = _chatbox.chatTextbox.Text.Trim();
+
+            // Add sent message to chatbox 
+            var message = _messageChainVm.AddNewUserMessage(_chatboxInfo, chatmessage);
+            _chatbox.AddMessage(message);
+            _chatbox.Text = "";
+
+            // Add sent message to chatbox 
+            var messageReceived = await _messageChainVm.GenerateAiResponse(_chatboxInfo, chatmessage);
+            _chatbox.AddMessage(messageReceived);
+
+            _chatbox.chatTextbox.Select();
+        }
+
+
     }
 }

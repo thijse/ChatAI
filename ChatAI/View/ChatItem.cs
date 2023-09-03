@@ -25,7 +25,6 @@ namespace winforms_chat.ChatForm
         public ChatItem(IChatModel chatModel)
         {
             InitializeComponent();
-
             ChatModel = chatModel;
 
             if (chatModel.Role != Roles.User)

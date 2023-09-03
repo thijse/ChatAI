@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using winforms_chat.Model;
+using winforms_chat.Utilities;
 using winforms_chat.ViewModels;
 
 namespace winforms_chat
 {
 	static class Program
 	{
-       
+        private static ChatMainForm _chatMainForm;
         private static ChatAIViewModel _chatAIVm;
 
         /// <summary>
@@ -18,13 +20,15 @@ namespace winforms_chat
         [STAThread]
 		static void Main()
 		{
-            //_chatGPT = new ChatGPT.OpenAIGPTViewModel();
-
-            _chatAIVm = new ChatAIViewModel();
+            Config<AppConfig>.Load("appsettings.json");
+            
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChatMainForm(_chatAIVm));
+
+            _chatMainForm = new ChatMainForm();
+            _chatAIVm     = new ChatAIViewModel(_chatMainForm);
+            Application.Run(_chatMainForm);
         }
 	}
 }

@@ -8,12 +8,10 @@ namespace winforms_chat.Model
 
     public interface IChatModel
     {
-        //      bool Inbound { get; set; }
         DateTime TimeStamp       { get; set; }
         string Persona           { get; set; }
         public Roles Role        { get; set; }
         string Type              { get; }
-
         string UserOutputMessage { get; }
     }
 

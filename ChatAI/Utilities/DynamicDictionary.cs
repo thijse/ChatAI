@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 
-namespace winforms_chat.Utilities
+namespace ChatAI.Utilities
 {
     public class DynamicDictionary : DynamicObject
     {

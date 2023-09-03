@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using winforms_chat.ChatForm;
-using winforms_chat.ChatGPT;
-using winforms_chat.Model;
+using ChatAI.ChatForm;
+using ChatAI.ChatGPT;
+using ChatAI.Model;
 
-namespace winforms_chat.ViewModels
+namespace ChatAI.ViewModels
 {
     public class MessageChainViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using winforms_chat.Model;
+using ChatAI.Model;
 
-namespace winforms_chat.ChatGPT
+namespace ChatAI.ChatGPT
 {
     public interface IAIViewModel
     {

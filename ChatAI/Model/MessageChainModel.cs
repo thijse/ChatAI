@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenAI.ObjectModels.ResponseModels;
 using OpenAI.ObjectModels.SharedModels;
 
-namespace winforms_chat.Model
+namespace ChatAI.Model
 {
 
     public interface IChatModel

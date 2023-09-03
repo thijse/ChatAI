@@ -8,12 +8,12 @@ using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels;
 using OpenAI.ObjectModels.ResponseModels;
 using OpenAI.ObjectModels.SharedModels;
-using winforms_chat.Utilities;
-using winforms_chat.Model;
-using winforms_chat.ChatGPT;
+using ChatAI.Utilities;
+using ChatAI.Model;
+using ChatAI.ChatGPT;
 using System.Threading;
 
-namespace winforms_chat.AIProvider.OpenAI
+namespace ChatAI.AIProvider.OpenAI
 {
     public class OpenAIViewModel : IAIViewModel
     {
@@ -35,26 +35,13 @@ namespace winforms_chat.AIProvider.OpenAI
             });
         }
 
-        //        private ChatCompletionCreateRequest GetDefaultChatCompletionCreateRequest()
-        //        {
-        //#pragma warning disable CS0618 // Type or member is obsolete
-        //            var request = new ChatCompletionCreateRequest()
-        //            {
-        //                Model = Models.ChatGpt3_5Turbo0301,
-        //                //MaxTokens = 3000//optional
-        //            };
-        //#pragma warning restore CS0618 // Type or member is obsolete
-
-        //            return request;
-        //        }
 
         private ChatCompletionCreateRequest GetDefaultChatCompletionCreateRequest()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             var request = new ChatCompletionCreateRequest()
             {
-                Model = Config<AppConfig>.Params.Model  // "ggml-gpt4all-j",
-                //Model = "ggml-gpt4all-j",
+                Model = Config<AppConfig>.Params.Model 
                 //MaxTokens = 3000//optional
             };
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -64,8 +51,9 @@ namespace winforms_chat.AIProvider.OpenAI
 
         public async Task<List<string>> GetModels()
         {
-            List<string> models = new List<string>();   
-            var response = await _openAiService.ListModel(new CancellationTokenSource(2500).Token);
+            List<string> models = new List<string>();
+            //var response = await _openAiService.ListModel(new CancellationTokenSource(2500).Token);
+            var response = await _openAiService.ListModel();
             if (response == null) {return models; }
             foreach (var model in response.Models){ models.Add(model.Id); }   
             return models;

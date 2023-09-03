@@ -1,7 +1,7 @@
-﻿using winforms_chat.AIProvider.OpenAI;
-using winforms_chat.View;
+﻿using ChatAI.AIProvider.OpenAI;
+using ChatAI.View;
 
-namespace winforms_chat.ViewModels
+namespace ChatAI.ViewModels
 {
     public class SettingsViewModel
     {

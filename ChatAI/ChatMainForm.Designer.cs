@@ -1,5 +1,5 @@
 ﻿
-namespace winforms_chat
+namespace ChatAI
 {
     partial class ChatMainForm
     {

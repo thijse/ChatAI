@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace winforms_chat.AI
+namespace ChatAI.AI
 {
     public class ChatItem
     {

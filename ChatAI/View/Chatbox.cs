@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using winforms_chat.AIProvider.OpenAI;
-using winforms_chat.Model;
-using winforms_chat.Utilities;
-using winforms_chat.View;
-using winforms_chat.ViewModels;
+using ChatAI.AIProvider.OpenAI;
+using ChatAI.Model;
+using ChatAI.Utilities;
+using ChatAI.View;
+using ChatAI.ViewModels;
 
-namespace winforms_chat.ChatForm
+namespace ChatAI.ChatForm
 {
     public partial class Chatbox : UserControl
     {

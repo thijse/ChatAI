@@ -1,4 +1,4 @@
-﻿namespace winforms_chat.ChatForm
+﻿namespace ChatAI.ChatForm
 {
     public class ChatboxInfo
     {

@@ -1,4 +1,4 @@
-﻿namespace winforms_chat.AIProvider.OpenAI
+﻿namespace ChatAI.AIProvider.OpenAI
 {
     partial class OpenAISettingsUserComponent
     {

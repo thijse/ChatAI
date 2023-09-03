@@ -7,7 +7,7 @@ using System.Xml;
 using System.Text.Json;
 using System.Configuration;
 
-namespace winforms_chat.Utilities
+namespace ChatAI.Utilities
 {
 
     public class Config<TConfig> where TConfig : new()

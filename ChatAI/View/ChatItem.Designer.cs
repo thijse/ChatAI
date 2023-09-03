@@ -1,5 +1,5 @@
 ﻿
-namespace winforms_chat.ChatForm
+namespace ChatAI.ChatForm
 {
     partial class ChatItem
     {

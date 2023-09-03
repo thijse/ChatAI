@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using winforms_chat.ViewModels;
+using ChatAI.ViewModels;
 
-namespace winforms_chat.View
+namespace ChatAI.View
 {
     public partial class SettingsForm : Form
     {

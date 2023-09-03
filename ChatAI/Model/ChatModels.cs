@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace winforms_chat.Model
+namespace ChatAI.Model
 {
   //  public interface IChatModel
   //  {

@@ -1,4 +1,4 @@
-﻿namespace winforms_chat.Model
+﻿namespace ChatAI.Model
 {
     public class AppConfig
     {

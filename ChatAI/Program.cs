@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using winforms_chat.Model;
-using winforms_chat.Utilities;
-using winforms_chat.ViewModels;
+using ChatAI.Model;
+using ChatAI.Utilities;
+using ChatAI.ViewModels;
 
-namespace winforms_chat
+namespace ChatAI
 {
 	static class Program
 	{

@@ -1,4 +1,4 @@
-﻿namespace winforms_chat.View
+﻿namespace ChatAI.View
 {
     partial class SettingsForm
     {

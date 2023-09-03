@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace winforms_chat.ChatForm
+namespace ChatAI.ChatForm
 {
     public static class ChatUtility
     {

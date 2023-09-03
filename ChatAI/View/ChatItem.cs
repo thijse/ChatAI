@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using winforms_chat.Model;
+using ChatAI.Model;
 
-namespace winforms_chat.ChatForm
+namespace ChatAI.ChatForm
 {
     public partial class ChatItem : UserControl
     {

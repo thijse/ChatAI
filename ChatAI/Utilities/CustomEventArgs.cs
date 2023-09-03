@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace winforms_chat.Utilities
+namespace ChatAI.Utilities
 {
     // Custom event handler with 1 argument
     public delegate void CustomEventHandlerArg<T1>(object sender, CustomEventArgs<T1> args);

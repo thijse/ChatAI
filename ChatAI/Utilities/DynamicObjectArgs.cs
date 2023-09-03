@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace winforms_chat.Utilities
+namespace ChatAI.Utilities
 {
     internal class DynamicObjectArgs
     {

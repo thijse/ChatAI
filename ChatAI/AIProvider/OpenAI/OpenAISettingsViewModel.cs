@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
-using winforms_chat.Model;
-using winforms_chat.Utilities;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using ChatAI.Model;
+using ChatAI.Utilities;
 
-namespace winforms_chat.AIProvider.OpenAI
+namespace ChatAI.AIProvider.OpenAI
 {
     
 
@@ -43,11 +44,18 @@ namespace winforms_chat.AIProvider.OpenAI
         public async Task GetModels()
         {
             _openAISettingsUc.comboBoxOpenAiModel.Items.Clear();
-            var models = await _openAIViewModel.GetModels();
-            foreach (var model in models)
+            try
             {
-                _openAISettingsUc.comboBoxOpenAiModel.Items.Add(model);
+                var models = await _openAIViewModel.GetModels();
+                foreach (var model in models)
+                {
+                    _openAISettingsUc.comboBoxOpenAiModel.Items.Add(model);
+                }
             }
+            catch (System.Exception){
+                Debug.WriteLine("OpenAISettingsViewModel.GetModels() failed");
+            }
+
         }
     }
 }

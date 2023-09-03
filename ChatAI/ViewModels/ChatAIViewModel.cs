@@ -1,11 +1,11 @@
 ﻿using System;
-using winforms_chat.AIProvider.OpenAI;
-using winforms_chat.ChatForm;
-using winforms_chat.Model;
-using winforms_chat.Utilities;
-using winforms_chat.View;
+using ChatAI.AIProvider.OpenAI;
+using ChatAI.ChatForm;
+using ChatAI.Model;
+using ChatAI.Utilities;
+using ChatAI.View;
 
-namespace winforms_chat.ViewModels
+namespace ChatAI.ViewModels
 {
     public class ChatAIViewModel
     {

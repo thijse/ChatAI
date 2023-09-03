@@ -14,28 +14,31 @@ namespace ChatAI.ChatForm
     {
         public event EventHandler CtrlEnterPressed;
         private int _baseHeightChat;
+        private int _baseHeightEditPanel;
 
-        public override string Text 
-        { 
-            get => chatTextbox.Text; 
-            set => chatTextbox.Text = value; 
+        public override string Text
+        {
+            get => chatTextbox.Text;
+            set => chatTextbox.Text = value;
         }
 
         public ChatboxInfo chatboxInfo;
         public OpenFileDialog fileDialog = new OpenFileDialog();
-        public string initialdirectory  = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public string initialdirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         public Chatbox(ChatboxInfo _chatbox_info)
         {
             InitializeComponent();
-            _baseHeightChat      = chatTextbox.Height;
-            chatboxInfo          = _chatbox_info;
-            mainHeaderLabel.Text = chatboxInfo.NamePlaceholder;
-            statusLabel.Text     = chatboxInfo.StatusPlaceholder;
-            subHeaderLabel.Text  = chatboxInfo.PhonePlaceholder;
-            chatTextbox.Text     = chatboxInfo.ChatPlaceholder;
+            _baseHeightChat = chatTextbox.Height;
+            _baseHeightEditPanel = bottomPanel.Height;
 
-            chatTextbox.Enter   += ChatEnter;
+            chatboxInfo = _chatbox_info;
+            mainHeaderLabel.Text = chatboxInfo.NamePlaceholder;
+            statusLabel.Text = chatboxInfo.StatusPlaceholder;
+            subHeaderLabel.Text = chatboxInfo.PhonePlaceholder;
+            chatTextbox.Text = chatboxInfo.ChatPlaceholder;
+
+            chatTextbox.Enter += ChatEnter;
             chatTextbox.KeyDown += OnKeyDown;
 
 
@@ -113,8 +116,9 @@ namespace ChatAI.ChatForm
             var newHeight = (int)(chatTextbox.Lines.Length * size.Height + 5);
             var maxAutoGrowHeight = 100;
 
-            // Splitter minimum size depends directly on the height of the chatbox
-            splitContainer1.Panel2MinSize = newHeight + 10;
+            // Splitter minimum size depends directly on the height of the chatbox,
+            // But never smaller than the initial height of the edit panel
+            splitContainer1.Panel2MinSize = Math.Max(newHeight + 10, _baseHeightEditPanel);
 
             // Let the box grow, but not indefinitely
             if (currentHeight < maxAutoGrowHeight && newHeight > currentHeight)

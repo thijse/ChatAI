@@ -118,10 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="sendButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        nAAAAJwBXTUFigAAAPZJREFUSEu11T8PwUAYx3EkIv5tRokXYJdg9ToMJF6AXWK0Gi1GEqvROxAx8RYk
+        NgODgfo+jSbXa9FKn1/yubQX97S5nruU4ziqpCkhbXYmSZoRDhigIJ1JkqaMEyQXTFFD4Mf/8C56MPPA
+        Gh34BsTlXWSwRVj2kOnLwzc4CvOmiSc+5YwJqjDHfWV3LPArd6wgL2SPD7A75O2uiJodusjCruUK6xwj
+        bmQVyrgKfPV8N285DHFE3NwwQx1uPbu4rY054kybRBbLBo2woiaVB6hPkepHVl+mS/zK33+0FtS2CvXN
+        rg8ziW7X6geO+pFZhOqhr8hJvQBtkXMo6b2IGwAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="buttonSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        cQAAAHEBHD+AdwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEdSURBVDhPlZM7
+        cAAAAHABznhikwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEdSURBVDhPlZM7
         TgNBEAVHGAk54wAkBCYhgswH8RUMGHwCQmIsEhAisAXiDJwD8Yk5BGASBFStZ1fDeljjJ5XU6unXO5/e
         0KDvGktL02lkYYMNOIY2rMEQNPUixuZcs8ZaPZVuwaIXeIR3GMNmZBJzD2CNtXoKdeELBnADT9CBusy5
         dg0HoEdvuINP2IdWRO3AFVzGWJXr1urRG9ZhFBMnJpCGD/A49zHeBWWNtXr0VnqD/iwsvup2V2EFbHIB

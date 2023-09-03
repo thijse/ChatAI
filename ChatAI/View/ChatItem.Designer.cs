@@ -81,7 +81,7 @@ namespace ChatAI.ChatForm
             bodyTextBox.BackColor = System.Drawing.Color.FromArgb(216, 251, 210);
             bodyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             bodyTextBox.CausesValidation = false;
-            bodyTextBox.Font = new System.Drawing.Font("Segoe UI Emoji", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            bodyTextBox.Font = new System.Drawing.Font("Segoe UI Emoji", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             bodyTextBox.ForeColor = System.Drawing.Color.FromArgb(40, 40, 40);
             bodyTextBox.Location = new System.Drawing.Point(1, 1);
             bodyTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

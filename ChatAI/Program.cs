@@ -21,9 +21,10 @@ namespace ChatAI
 		static void Main()
 		{
             Config<AppConfig>.Load("appsettings.json");
-            
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-			Application.EnableVisualStyles();
+
+            //Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            //Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+            Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
             _chatMainForm = new ChatMainForm();

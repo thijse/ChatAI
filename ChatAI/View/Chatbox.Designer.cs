@@ -38,9 +38,9 @@ namespace ChatAI.ChatForm
             subHeaderLabel = new System.Windows.Forms.Label();
             mainHeaderLabel = new System.Windows.Forms.Label();
             bottomPanel = new System.Windows.Forms.Panel();
+            label1 = new System.Windows.Forms.Label();
             chatTextbox = new System.Windows.Forms.TextBox();
             sendButton = new System.Windows.Forms.Button();
-            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -67,7 +67,7 @@ namespace ChatAI.ChatForm
             splitContainer1.Panel2.Controls.Add(bottomPanel);
             splitContainer1.Panel2MinSize = 82;
             splitContainer1.Size = new System.Drawing.Size(872, 643);
-            splitContainer1.SplitterDistance = 547;
+            splitContainer1.SplitterDistance = 556;
             splitContainer1.TabIndex = 2;
             // 
             // itemsPanel
@@ -77,7 +77,7 @@ namespace ChatAI.ChatForm
             itemsPanel.Location = new System.Drawing.Point(0, 60);
             itemsPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             itemsPanel.Name = "itemsPanel";
-            itemsPanel.Size = new System.Drawing.Size(872, 487);
+            itemsPanel.Size = new System.Drawing.Size(872, 496);
             itemsPanel.TabIndex = 4;
             // 
             // topPanel
@@ -160,8 +160,19 @@ namespace ChatAI.ChatForm
             bottomPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             bottomPanel.Name = "bottomPanel";
             bottomPanel.Padding = new System.Windows.Forms.Padding(18, 12, 18, 12);
-            bottomPanel.Size = new System.Drawing.Size(872, 92);
+            bottomPanel.Size = new System.Drawing.Size(872, 83);
             bottomPanel.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            label1.Location = new System.Drawing.Point(16, 63);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(194, 15);
+            label1.TabIndex = 2;
+            label1.Text = "[Shift-Enter] send, [Enter] line break";
             // 
             // chatTextbox
             // 
@@ -173,33 +184,23 @@ namespace ChatAI.ChatForm
             chatTextbox.Multiline = true;
             chatTextbox.Name = "chatTextbox";
             chatTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            chatTextbox.Size = new System.Drawing.Size(768, 58);
+            chatTextbox.Size = new System.Drawing.Size(781, 51);
             chatTextbox.TabIndex = 0;
             chatTextbox.TextChanged += chatTextbox_TextChanged;
             // 
             // sendButton
             // 
-            sendButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            sendButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             sendButton.BackColor = System.Drawing.Color.FromArgb(44, 107, 237);
             sendButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             sendButton.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             sendButton.Image = (System.Drawing.Image)resources.GetObject("sendButton.Image");
-            sendButton.Location = new System.Drawing.Point(794, 7);
+            sendButton.Location = new System.Drawing.Point(807, 8);
             sendButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             sendButton.Name = "sendButton";
-            sendButton.Size = new System.Drawing.Size(70, 59);
+            sendButton.Size = new System.Drawing.Size(61, 51);
             sendButton.TabIndex = 1;
             sendButton.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            label1.Location = new System.Drawing.Point(18, 72);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(194, 15);
-            label1.TabIndex = 2;
-            label1.Text = "[Shift-Enter] send, [Enter] line break";
             // 
             // Chatbox
             // 
